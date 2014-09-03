@@ -1,3 +1,6 @@
 function ret = test(x)
-ret = x+x;
+%hi I'm a unicornn
+
+z = x*x;
+ret=z;
 end
