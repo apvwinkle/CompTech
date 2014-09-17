@@ -1,0 +1,20 @@
+function intersection = newtonintersection(f, g, guess, iterations)
+%This function solves for the intersection of two polynomial functions (entered as arrays) with initial
+%guesses at an x value and y value that is close to the intersection.
+xf = guess; xg = guess;
+for i=1:iterations
+    f = polyval(f, xf)
+    g = polyval(g, xg)
+    df = polyder(f, xf)
+    dg = polyder(g, xg)
+    xf = xf - f/df
+    xg = xg - g/dg
+end
+% xf
+% xg
+% yf
+% yg
+xavg = (xf + xg)/2;
+yavg = (polyval(f, xf) + polyval(g, xg))/2;
+intersection(1) = xavg; intersection(2) = yavg;
+end
