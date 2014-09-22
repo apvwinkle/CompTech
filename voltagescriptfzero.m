@@ -6,6 +6,6 @@ Voc = 0.5;
 
 guess = 0.5; %for v
 
-V = @(v) (exp(1)^(Voc*s) - exp(1)^(v*s)) / (s * exp(1)^(s*v));
+V = @(v) Voc - log(1 + v*s)/s - v; %V=0
 
 fzero(V,0.5)
