@@ -1,13 +1,12 @@
-function xval = fixedpoint(gfun, guess,iterations)
-%This function solves for the root of function f with an initial
-%guesses at an x value that is close to the root. You must first find the
-%function g(x) by taking f(x) and finding an equation that has a single x
-%on one side.
-%example: f(x) = 2*X -3*x^2 = 0, now we solve for x and get g(x) =
-%(3*x^2)/2
-x = guess;
-for i=1:iterations
-    x = gfun(x);
+function fixedpoint(A, b, guess)
+%This finds the roots of a system of equations input as a matrix A with the
+%answer as a column vector b. You must also input a column vector of
+%xguesses.
+Ad = diag(1 ./ diag(A), 0);
+Aoff = A - diag(diag(A));
+xnew = guess
+for i=1:length(A)
+    i
+xnew = Ad * (b - Aoff*xnew)
 end
-xval=x;
 end
