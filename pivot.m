@@ -4,10 +4,10 @@ function ret = pivot(A, c)
 %pivots on the diagonal). It will return with your pivoted matrix.
 n = size(A,1); %gets the number of loops we'll need from the size of the matrix
 Ap = A;
-    part = Ap(c:n, :); %row c to the last row get pivoted
-    [d i] = sortrows(abs(part), c); %it is sorting from the c column because we will be using  diagonal
-    %we use i to make our real matrix go in the right order
-    part = part(flipud(i), :);
-    Ap(c:n,:) = part; %replace row n to the end with whatever is in part
+part = Ap(c:n, :); %row c to the last row get pivoted
+[d i] = sortrows(abs(part), c); %it is sorting from the c column because we will be using  diagonal
+%we use i to make our real matrix go in the right order
+part = part(flipud(i), :);
+Ap(c:n,:) = part; %replace row n to the end with whatever is in part
 ret = Ap;
 end
