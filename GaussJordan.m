@@ -1,9 +1,9 @@
-function ret = gaussjordelim(A,b)
-%This performs Gauss -Jordan elimination for a square matrix A *
+function x = GaussJordan(a,b)
+%This performs Gauss -Jordan elimination for a square matrix a *
 %variables = b to solve for the variables. b must be input as a column
 %vector
-Aaug = [A b];
-n = size(A,1); %gets the number of loops we'll need from the size of the matrix
+Aaug = [a b];
+n = size(a,1); %gets the number of loops we'll need from the size of the matrix
 %FINDING THE DETERMINANT
 for i = 1:n %we want to change all columns except the first
     pivot(Aaug,i);
@@ -15,5 +15,5 @@ for i = 1:n %we want to change all columns except the first
         end
     end
 end
-ret = Aaug(:,n+1);
+x = Aaug(:,n+1);
 end
