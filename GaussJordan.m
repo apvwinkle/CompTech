@@ -1,12 +1,12 @@
 function x = GaussJordan(a,b)
 %This performs Gauss -Jordan elimination for a square matrix a *
 %variables = b to solve for the variables. b must be input as a column
-%vector
+%vector. Or it can be a square matrix when used to find the inverse.
 Aaug = [a b];
 n = size(a,1); %gets the number of loops we'll need from the size of the matrix
 %FINDING THE DETERMINANT
 for i = 1:n %we want to change all columns except the first
-    pivot(Aaug,i);
+    Aaug = pivot(Aaug,i);
     pivotelem =  Aaug(i,i); %our pivot element changes each row and goes diagonally down the matrix
     Aaug(i,:) = Aaug(i,:)/pivotelem;
     for j = 1:n
@@ -15,5 +15,6 @@ for i = 1:n %we want to change all columns except the first
         end
     end
 end
-x = Aaug(:,n+1);
+m = size(b,2);
+x = Aaug(:,n+1:n+m);
 end
