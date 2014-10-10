@@ -4,7 +4,7 @@ function Xs = RegulaRoot(Fun, a, b, ErrMax)
 if Fun(a)*Fun(b) > 0 %you want one y value to be + and one y value to be -
     error('You need to choose new points, because the solution is not in between a and b.')
 end
-for i = 1:10
+for i = 1:10000
     if i>1
         xprevious = x;
     end
