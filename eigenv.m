@@ -7,16 +7,18 @@ matrices
 it also won't find degenerate lambdas; it will only find one
 %}
 n = size(A,1);
-guess = zeros(n,1);
-guess = guess(1,1) = 1;
-for 1:1000
-    uprev = guess
+guess = zeros(n,1); %creates a vector of zeros
+guess(1,1) = 1; %this is a starting guess for the eigenvector
+for i = 1:10 %CHANGE IT BACK LATER APRIL
+    uprev = guess;
     ul = A*guess; %ul = unit vector * lambda
-    lambda = norm(ul);
-    u = ul / lambda;
+    l = norm(ul); %l is lambda
+    u = ul / l;
     if uprev == u
-        break
+        return
     end
     guess = u;
 end
+lambda = double(l);
+u = double(u);
 end
