@@ -8,10 +8,10 @@ matrices
 n = size(A,1);
 L = zeros(1, n);
 U = zeros(n,n);
-for i = 1:n
 u = zeros(n,1); %creates a vector of zeros for a guess
 u(1,1) = 1; %this is a starting guess for the eigenvector
-    for I = 1:1000
+for i = 1:n
+    for I = 1:100000
         uprev = u;
         ul = abs(A*u); %ul is unit vector * lambda
         l = norm(ul); %l is lambda
@@ -20,7 +20,8 @@ u(1,1) = 1; %this is a starting guess for the eigenvector
             lambda = double(l);
             u = double(u);
             break
-        end 
+        end
+        lambda = l;
     end
 U(:,i) = u;
 L(1,i) = lambda;

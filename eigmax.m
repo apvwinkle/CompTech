@@ -1,4 +1,4 @@
-function l = eigmax(A)
+function [u l] = eigmax(A)
 %this uses the Power Method to calculate the largest eigenvlalue of a
 %matrix
 %{
@@ -9,14 +9,15 @@ it won't find eigenvectors
 %}
 n = size(A,1);
 x = ones(n,1); %this is a starting guess for the eigenvector
-for i = 1:1000
+for i = 1:100000
     uprev = x;
     ul = A*x; %ul = unit vector * lambda
-    l = max(ul); %l is lambda
-    u = ul / l; %this divides out the largest value
+    lambda = norm(ul); %l is lambda
+    u = ul / lambda; %this makes u a unit vector
     if uprev == u;
-        return
+        break
     end
     x = u;
 end
+l = lambda
 end
