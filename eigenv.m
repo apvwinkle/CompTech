@@ -1,24 +1,29 @@
-function [lambda u] = eigenv(A)
+function [U L] = eigenv(A)
 %this uses the Power Method to calculate the largest eigenvlalue of a
 %matrix and it's corresponding eigenvectors
 %{
 it won't work with complex lambdas and will only work with symmetric A
 matrices
-it also won't find degenerate lambdas; it will only find one
 %}
 n = size(A,1);
-guess = zeros(n,1); %creates a vector of zeros
-guess(1,1) = 1; %this is a starting guess for the eigenvector
-for i = 1:10 %CHANGE IT BACK LATER APRIL
-    uprev = guess;
-    ul = A*guess; %ul = unit vector * lambda
-    l = norm(ul); %l is lambda
-    u = ul / l;
-    if uprev == u
-        return
+L = zeros(1, n);
+U = zeros(n,n);
+for i = 1:n
+u = zeros(n,1); %creates a vector of zeros for a guess
+u(1,1) = 1; %this is a starting guess for the eigenvector
+    for I = 1:1000
+        uprev = u;
+        ul = abs(A*u); %ul is unit vector * lambda
+        l = norm(ul); %l is lambda
+        u = ul / l;
+        if uprev == u
+            lambda = double(l);
+            u = double(u);
+            break
+        end 
     end
-    guess = u;
+U(:,i) = u;
+L(1,i) = lambda;
+A = A - l*(u*u');
 end
-lambda = double(l);
-u = double(u);
 end
