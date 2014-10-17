@@ -1,4 +1,5 @@
-function [u l] = eigmax(A)
+function [l u] = eigmax(A)
+% April-- you'll need both l and u, so I added these to the return list for your eigmax function.
 %this uses the Power Method to calculate the largest eigenvlalue of a
 %matrix
 %{
@@ -9,15 +10,18 @@ it won't find eigenvectors
 %}
 n = size(A,1);
 x = ones(n,1); %this is a starting guess for the eigenvector
-for i = 1:100000
+for i = 1:1000000
     uprev = x;
     ul = A*x; %ul = unit vector * lambda
-    lambda = norm(ul); %l is lambda
-    u = ul / lambda; %this makes u a unit vector
-    if uprev == u;
-        break
-    end
+%    April, I know the book says to use max(ul) (the infinity norm) but this does not give a unit vector for u.
+%     So I changed out the line below for the "norm" function, which agrees better with MATLAB 'eig'.
+%    biggest = max(ul); %l is lambda
+	biggest = norm(ul); % use the euclidean norm instead of the infinity norm
+    u = ul / biggest; %this divides out the largest value
+%     if uprev == u;
+%         break %Yes!! This would speed execution not having to go 10^6 loops....
+%     end
     x = u;
 end
-l = lambda
+l = biggest;
 end

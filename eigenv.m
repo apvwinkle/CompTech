@@ -1,30 +1,16 @@
-function [U L] = eigenv(A)
+function [L U] = eigenv(A)
 %this uses the Power Method to calculate the largest eigenvlalue of a
-%matrix and it's corresponding eigenvectors
+%matrix and its corresponding eigenvectors
 %{
 it won't work with complex lambdas and will only work with symmetric A
 matrices
 %}
 n = size(A,1);
-L = zeros(1, n);
-U = zeros(n,n);
-u = zeros(n,1); %creates a vector of zeros for a guess
-u(1,1) = 1; %this is a starting guess for the eigenvector
+L = zeros(1, n); %for all the eigenvalues
+U = zeros(n,n); %the eigenvectors
+%Loop through all n eigenvectors/eigenvalues
 for i = 1:n
-    for I = 1:100000
-        uprev = u;
-        ul = abs(A*u); %ul is unit vector * lambda
-        l = norm(ul); %l is lambda
-        u = ul / l;
-        if uprev == u
-            lambda = double(l);
-            u = double(u);
-            break
-        end
-        lambda = l;
-    end
-U(:,i) = u;
-L(1,i) = lambda;
-A = A - l*(u*u');
-end
+	[L(i) U(:,i)] = eigmax(A); % This gets the largest eigenvector u and eigenvalue l and puts them in U and L
+	A = A - (U(:,i)*U(:,i)')*L(i); %This computes the residual matrix Aresid = A - (u*u')*l and replaces A.
+	% new residual matrix A now has the next eigenvalue as its largest eigenvalue
 end
