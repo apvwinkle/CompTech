@@ -8,7 +8,6 @@ matrices
 n = size(A,1);
 L = zeros(1, n); %for all the eigenvalues
 U = zeros(n,n); %the eigenvectors
-%Loop through all n eigenvectors/eigenvalues
 for i = 1:n
 	[L(i) U(:,i)] = eigmax(A); % This gets the largest eigenvector u and eigenvalue l and puts them in U and L
 	A = A - (U(:,i)*U(:,i)')*L(i); %This computes the residual matrix Aresid = A - (u*u')*l and replaces A.

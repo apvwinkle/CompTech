@@ -15,7 +15,7 @@ for i = 1:1000000
 	lambda = norm(ul); % use the euclidean norm instead of the infinity norm
     u = ul / lambda; %this makes u a unit vector
     if uprev == u;
-        break %Yes!! This would speed execution not having to go 10^6 loops....
+        break
     end
     x = u;
 end
