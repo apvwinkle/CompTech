@@ -1,6 +1,7 @@
-function coeffs = polynominal(x,y,m)
+function coeffs = polynomial(x,y,m)
 %This fits a polynominal function of degree m to a set of (x,y) data. The
 %coefficients are returned in the order a*x^m + b*x^(m-1) + ... + z
+xsum = zeros(1,2*m);
 for i = 1:2*m %we need 2*m for our system of equations
     xsum(i) = sum(x.^(i));
 end
@@ -15,6 +16,7 @@ for j = 2:m+1
     b(j,1) = sum(x.^(j - 1) .*y); %answer column
 end
 p = (a\b)'; %solves the system of eqs
+coeffs = zeros(1,m+1);
 for i = 1:m+1
 coeffs(i) = p(m + 2 - i);
 end
