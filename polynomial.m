@@ -1,5 +1,5 @@
 function coeffs = polynomial(x,y,m)
-%This fits a polynominal function of degree m to a set of (x,y) data. The
+%This fits a polynomial function of degree m to a set of (x,y) data. The
 %coefficients are returned in the order a*x^m + b*x^(m-1) + ... + z
 xsum = zeros(1,2*m);
 for i = 1:2*m %we need 2*m for our system of equations
@@ -20,4 +20,14 @@ coeffs = zeros(1,m+1);
 for i = 1:m+1
 coeffs(i) = p(m + 2 - i);
 end
+E = zeros(1,n); %calculating the error
+Xs = zeros(1,m+1);
+for i = 1:n %number of data points
+    for j = 1:m+1
+        Xs(j) = coeffs(j)*x(i)^(m+1-j);
+    end
+    Xsum = sum(Xs);
+    E(i) = sum((y(i)-Xsum)^2);
+end
+Error = sum(E)
 end
