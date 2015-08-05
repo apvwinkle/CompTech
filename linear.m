@@ -1,6 +1,6 @@
 function eq = linear(x,y)
 %This calculates the best fit line to a set of (x,y) data points. eq
-%contains [m b].
+%contains [m b]. It also plots the data points and the fitted line.
 plot(x,y,'o')
 hold on
 n = length(x);
@@ -16,10 +16,14 @@ else
     slope = (n*Sxy - Sx*Sy) / (n*Sxx - Sx^2);
     intercept = (Sxx*Sy - Sxy*Sx) / (n*Sxx - Sx^2);
 end
+for i = 1:length(x)
+E(i) = ( y(i) - (slope*x(i) + intercept) )^2;
+end
+Error = sum(E)
 eq = [slope intercept];
 xcalc = linspace(min(x),max(x));
 ycalc = slope*xcalc + intercept;
 plot(xcalc,ycalc,'r-');
-equation = ['y = ' num2str(slope) 'x + ' num2str(intercept)];
+equation = ['y = ' num2str(slope) '*x + ' num2str(intercept)];
 title(equation)
 end
